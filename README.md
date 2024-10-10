@@ -1,3 +1,7 @@
+Here is forked from marakeby/pnet_prostate_paper. I modified some problems about environment. Now the pipeline of pnet can run on my system.
+
+------------------------
+
 <!--
 MIT License
 
@@ -157,8 +161,24 @@ To get a local copy up and running, follow these simple steps
 2. Add the current diretory to PYTHONPATH, e.g.
 
    ```sh
-   export PYTHONPATH=~/pnet_prostate_paper:$PYTHONPATH
+   export PYTHONPATH=$(pwd):$PYTHONPATH
    ```
+3. Set matplotlib to not use the Xwindows backend, e.g.
+
+   ```sh
+   echo "backend: Agg" > ~/.config/matplotlib/matplotlibrc
+   ```
+
+5. To re-train a model from scratch run
+   ```sh
+   cd ./train
+   python run_me.py
+   ```
+   This will run an experiment 'pnet/onsplit_average_reg_10_tanh_large_testing' which trains a P-NET model on a
+   training-testing data split of Armenia et al data set and compare it to a simple logistic regression model. The
+   results of the experiment will be stored under ```_logs```in a directory with the same name as the experiment.
+   To run another experiment, you may uncomment one of the lines in the run_me.py to run the corresponding experiment.
+   Note that some models especially cross validation experiments may be time consuming.
 
 3. To generate all paper figures, run
      ```sh
@@ -172,16 +192,6 @@ To get a local copy up and running, follow these simple steps
    python figure_1_d_auc_prc.py
    ```
    For ```Figure3``` , make sure you run ```prepare_data.py``` before running other files
-5. To re-train a model from scratch run
-   ```sh
-   cd ./train
-   python run_me.py
-   ```
-   This will run an experiment 'pnet/onsplit_average_reg_10_tanh_large_testing' which trains a P-NET model on a
-   training-testing data split of Armenia et al data set and compare it to a simple logistic regression model. The
-   results of the experiment will be stored under ```_logs```in a directory with the same name as the experiment.  
-   To run another experiment, you may uncomment one of the lines in the run_me.py to run the corresponding experiment.
-   Note that some models especially cross validation experiments may be time consuming.
 
 <!-- LICENSE -->
 
